@@ -133,35 +133,35 @@ class NewsFeed(object):
 
     def read_feed(self):
         """
-        Read the feed and store the news articles.
+        Read the feed and store any new articles that aren't already in the database.
         """
+        # Current timestamp for consistency
         today = datetime.datetime.now()
         today_morning = int(today.strftime("%Y%m%d"))
 
-        # get website id
+        # Get website id
         website_id = (
             session.query(Websites)
             .filter(Websites.name == self.name, Websites.rss == self.feed_url)
             .first()
             .id
         )
-        # get all articles from this website from today
-        articles = (
-            session.query(Articles)
-            .filter(
-                Articles.website_id == website_id, Articles.fetched_on == today_morning
-            )
-            .all()
-        )
 
-        if len(articles) == 0:
-            feed = feedparser.parse(self.feed_url)
-            for entry in feed.entries:
-                try:
+        # Parse the feed to get all articles
+        feed = feedparser.parse(self.feed_url)
+
+        # Process each entry
+        for entry in feed.entries:
+            try:
+                # Check if this article already exists in our database
+                existing_article = session.query(Articles).filter(Articles.link == entry.link).first()
+
+                if existing_article is None:
+                    # Article is new, add it
                     art = News(entry.title, entry.summary, entry.link, today_morning)
                     art.save(name=self.name, rss=self.feed_url)
 
-                    # get article id to save image
+                    # Get article id to save image
                     article_id = (
                         session.query(Articles)
                         .filter(Articles.link == entry.link)
@@ -169,25 +169,43 @@ class NewsFeed(object):
                         .id
                     )
 
-                    # check if there is an image in the article
+                    # Handle images if available
                     if "media_content" in entry:
                         img = entry.media_content[0]["url"].split("?")[0]
                         if img is not None:
-                            # check if image is already in the database
-                            if (
-                                session.query(Images).filter(Images.url == img).first()
-                                is None
-                            ):
-                                img = Images(url=img, article_id=article_id)
-                                session.add(img)
+                            # Check if image is already in the database
+                            if session.query(Images).filter(Images.url == img).first() is None:
+                                img_obj = Images(url=img, article_id=article_id)
+                                session.add(img_obj)
                                 session.commit()
 
+                    # Add to current news list
                     self.news.append(art)
-                except:
-                    pass
-        else:
-            for art in articles:
-                self.news.append(News(art.title, art.summary, art.link, art.fetched_on))
+                else:
+                    # Article exists, add to news list from database
+                    self.news.append(News(
+                        existing_article.title,
+                        existing_article.summary,
+                        existing_article.link,
+                        existing_article.fetched_on
+                    ))
+            except Exception as e:
+                print(f"Error processing entry: {str(e)}")
+
+        # Update the last fetched time for this website
+        session.query(Websites).filter(
+            Websites.id == website_id
+        ).update({"last_fetched": today_morning})
+        session.commit()
+                    ))
+            except Exception as e:
+                print(f"Error processing entry: {str(e)}")
+
+        # Update the last fetched time for this website
+        session.query(Websites).filter(
+            Websites.id == website_id
+        ).update({"last_fetched": today_morning})
+        session.commit()
 
     def __extract_image_url(self, art):
         """
