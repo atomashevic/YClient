@@ -1,0 +1,79 @@
+[
+    {
+        "url_site": "techcrunch.com",
+        "category": "technology",
+        "leaning": "center_left",
+        "name": "TechCrunch",
+        "feed_url": "https://techcrunch.com/feed/"
+    },
+    {
+        "url_site": "www.wired.com",
+        "category": "technology",
+        "leaning": "left",
+        "name": "Wired Magazine",
+        "feed_url": "https://www.wired.com/feed/rss"
+    },
+    {
+        "url_site": "theverge.com",
+        "category": "technology",
+        "leaning": "center_left",
+        "name": "The Verge",
+        "feed_url": "https://www.theverge.com/rss/index.xml"
+    },
+    {
+        "url_site": "www.nytimes.com/international/section/technology",
+        "category": "technology",
+        "leaning": "left",
+        "name": "NYT Technology",
+        "feed_url": "https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml"
+    },
+    {
+        "url_site": "www.arstechnica.com",
+        "category": "technology",
+        "leaning": "center",
+        "name": "ArsTechnica",
+        "feed_url": "https://feeds.arstechnica.com/arstechnica/index"
+    },
+    {
+        "url_site": "www.cnbc.com/technology/",
+        "category": "technology",
+        "leaning": "center",
+        "name": "CNBC Technology",
+        "feed_url": "https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=19854910"
+    },
+    {
+        "url_site": "www.theguardian.com/technology",
+        "category": "technology",
+        "leaning": "left",
+        "name": "The Guardian Technology",
+        "feed_url": "https://www.theguardian.com/technology/rss"
+    },
+    {
+        "url_site": "cnet.com",
+        "category": "technology",
+        "leaning": "center",
+        "name": "CNET Technology",
+        "feed_url": "https://www.cnet.com/rss/news/"
+    },
+    {
+        "url_site": "www.foxnews.com/tech",
+        "category": "technology",
+        "leaning": "right",
+        "name": "Fox News Technology",
+        "feed_url": "https://moxie.foxnews.com/google-publisher/tech.xml"
+    },
+    {
+        "url_site": "edition.cnn.com/business/tech",
+        "category": "technology",
+        "leaning": "left",
+        "name": "CNN Technology",
+        "feed_url": "http://rss.cnn.com/rss/cnn_tech.rss"
+    },
+    {
+        "url_site": "www.washingtontimes.com/news/technology",
+        "category": "technology",
+        "leaning": "right",
+        "name": "Washington Times Technology",
+        "feed_url": "https://www.washingtontimes.com/rss/headlines/culture/technology"
+    }
+]
