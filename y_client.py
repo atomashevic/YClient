@@ -106,17 +106,30 @@ if __name__ == "__main__":
     )
 
     if args.reset:
+        print("Resetting experiment...")
         experiment.reset_experiment()
-    if args.news:
-        experiment.reset_news_db()
-        experiment.load_rrs_endpoints(rss_feeds)
 
+    # Set recommendation systems
     experiment.set_recsys(content_recsys, follow_recsys)
 
-    if args.agents is None:
-        experiment.create_initial_population()
-    else:
-        experiment.load_existing_agents(args.agents)
+    # Handle news feeds if requested
+    proceed_with_simulation = True
+    if args.news:
+        print("Resetting news database...")
+        experiment.reset_news_db()
+        print("Loading RSS feeds...")
+        proceed_with_simulation = experiment.load_rrs_endpoints(rss_feeds)
 
-    experiment.save_agents()
-    experiment.run_simulation()
+    if proceed_with_simulation:
+        print("\nInitializing agent population...")
+        if args.agents is None:
+            experiment.create_initial_population()
+        else:
+            experiment.load_existing_agents(args.agents)
+
+        experiment.save_agents()
+        print("\nStarting simulation...")
+        experiment.run_simulation()
+    else:
+        print("\nSimulation aborted by user.")
+        sys.exit(1)

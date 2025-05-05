@@ -69,3 +69,4 @@ if __name__ == "__main__":
     out_file = args.out_file
 
     generate_feed(out_file, topics=topics, suffix=suffix)
+

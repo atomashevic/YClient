@@ -1,8 +1,6 @@
 import random
 import json
 import faker
-import os
-
 try:
     from y_client import Agent, PageAgent
 except:
@@ -18,9 +16,7 @@ def generate_user(config, owner=None):
     :return: Agent object
     """
 
-    BASE = os.path.dirname(os.path.abspath(__file__)).split("y_client")[0]
-
-    locales = json.load(open(f"{BASE}config_files{os.sep}nationality_locale.json"))
+    locales = json.load(open("config_files/nationality_locale.json"))
     try:
         nationality = random.sample(config["agents"]["nationalities"], 1)[0]
     except:

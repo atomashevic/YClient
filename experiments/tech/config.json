@@ -11,13 +11,13 @@
         "api": "http://127.0.0.1:5010/"
     },
     "simulation": {
-        "name": "simulation",
+        "name": "simulation_medium_platform",
         "client": "YClientBase",
-        "days": 30,
+        "days": 7,
         "slots": 24,
-        "starting_agents": 250,
-        "percentage_new_agents_iteration": 0.2,
-        "percentage_removed_agents_iteration": 0.01,
+        "starting_agents": 150,
+        "percentage_new_agents_iteration": 0.08,
+        "percentage_removed_agents_iteration": 0.04,
         "hourly_activity": {
             "10": 0.021,
             "16": 0.032,
@@ -47,27 +47,28 @@
         "actions_likelihood": {
             "post": 0.05,
             "image": 0.0,
-            "news": 0.1,
-            "comment": 0.2,
-            "read": 0.2,
+            "news": 0.0,
+            "comment": 0.5,
+            "read": 0.5,
             "share": 0.0,
-            "search": 0.1,
+            "search": 0.2,
+            "share_link": 0.2,
             "cast": 0.0
         }
     },
     "agents": {
         "languages": ["english"],
         "education_levels": ["high school", "bachelor", "master", "phd"],
-        "max_length_thread_reading": 4,
-        "reading_from_follower_ratio": 0.6,
+        "max_length_thread_reading": 5,
+        "reading_from_follower_ratio": 0.7,
         "political_leanings": ["Democrat", "Republican", "Independent"],
         "age": {
             "min": 18,
             "max": 60
         },
         "daily_actions": {
-            "min": 1,
-            "max": 6
+            "min": 2,
+            "max": 5
         },
         "llm_agents": ["dolphin3"],
         "llm_v_agent": ["minicpm-v"],
@@ -77,10 +78,10 @@
         },
         "round_actions": {
             "min": 1,
-            "max": 6
+            "max": 3
         },
         "nationalities": ["American"],
-        "probability_of_daily_follow": 0.1,
+        "probability_of_daily_follow": 0.15,
         "interests": [
             "Social Media & Online Platforms",
             "Internet Policy & Regulation",
@@ -104,7 +105,7 @@
         }
     },
     "posts": {
-        "visibility_rounds": 36,
+        "visibility_rounds": 48,
         "emotions": {
             "admiration": null,
             "amusement": null,

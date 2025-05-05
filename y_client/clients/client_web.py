@@ -29,8 +29,10 @@ class YClientWeb(object):
         """
         Initialize the YClient object
 
-        :param config_file: the configuration file for the simulation in JSON format
+        :param config_filename: the configuration file for the simulation in JSON format
+        :param prompts_filename: the LLM prompts file for the simulation in JSON format
         :param agents_filename: the file containing the agents in JSON format
+        :param graph_file: the file containing the graph of the agents in CSV format, where the number of nodes is equal to the number of agents
         :param agents_output: the file to save the generated agents in JSON format
         :param owner: the owner of the simulation
         :param first_run: if it is the first run of the simulation
@@ -48,9 +50,9 @@ class YClientWeb(object):
 
         self.days = int(self.config["simulation"]["days"])
         self.slots = int(self.config["simulation"]["slots"])
-        self.percentage_new_agents_iteration = float(
-            self.config["simulation"]["percentage_new_agents_iteration"]
-        )
+        self.percentage_new_agents_iteration = float(self.config["simulation"][
+            "percentage_new_agents_iteration"
+        ])
         self.hourly_activity = self.config["simulation"]["hourly_activity"]
         self.percentage_removed_agents_iteration = float(
             self.config["simulation"]["percentage_removed_agents_iteration"]
@@ -66,18 +68,16 @@ class YClientWeb(object):
 
         # users' parameters
         self.fratio = float(self.config["agents"]["reading_from_follower_ratio"])
-        self.max_length_thread_reading = int(
-            self.config["agents"]["max_length_thread_reading"]
-        )
+        self.max_length_thread_reading = int(self.config["agents"][
+            "max_length_thread_reading"
+        ])
 
         # posts' parameters
         self.visibility_rd = int(self.config["posts"]["visibility_rounds"])
 
         ##############
         BASE_DIR = os.path.dirname(os.path.abspath(__file__)).split("y_client")[0]
-        if not os.path.exists(
-            f"{BASE_DIR}experiments/{self.config['simulation']['name']}.db"
-        ):
+        if not os.path.exists(f"{BASE_DIR}experiments/{self.config['simulation']['name']}.db"):
             # copy the clean database to the experiments folder
             shutil.copyfile(
                 f"{BASE_DIR}data_schema/database_clean_client.db",
@@ -87,10 +87,7 @@ class YClientWeb(object):
         global session, engine, base
         base = declarative_base()
 
-        engine = db.create_engine(
-            f"sqlite:////{BASE_DIR}experiments/{self.config['simulation']['name']}.db",
-            connect_args={"check_same_thread": False},
-        )
+        engine = db.create_engine(f"sqlite:////{BASE_DIR}experiments/{self.config['simulation']['name']}.db")
         base.metadata.bind = engine
         session = orm.scoped_session(orm.sessionmaker())(bind=engine)
 
@@ -100,7 +97,7 @@ class YClientWeb(object):
         ##############
 
         yclient_path = os.path.dirname(os.path.abspath(__file__)).split("y_web")[0]
-        sys.path.append(f"{yclient_path}{os.sep}external{os.sep}YClient/")
+        sys.path.append(f'{yclient_path}{os.sep}external{os.sep}YClient/')
 
         from y_client.classes import Agent, Agents, SimulationSlot
         from y_client.news_feeds import Feeds
@@ -127,14 +124,13 @@ class YClientWeb(object):
         import y_client.recsys as frecsys
 
         # population filename
-        self.agents_filename = (
-            f"{self.base_path}{self.config['simulation']['population']}.json"
-        )
+        self.agents_filename = f"{self.base_path}{self.config['simulation']['population']}.json"
         data = json.load(open(self.agents_filename, "r"))
-        for ag in data["agents"]:
+        for ag in data['agents']:
             if ag["is_page"] == 0:
-                self.content_recsys = getattr(recsys, ag["rec_sys"])()
-                self.follow_recsys = getattr(frecsys, ag["frec_sys"])(leaning_bias=1.5)
+
+                content_recsys = getattr(recsys, ag["rec_sys"])()
+                follow_recsys = getattr(frecsys, ag["frec_sys"])(leaning_bias=1.5)
 
                 agent = Agent(
                     name=ag["name"],
@@ -154,16 +150,14 @@ class YClientWeb(object):
                     toxicity=ag["toxicity"],
                     gender=ag["gender"],
                     age=ag["age"],
-                    recsys=self.content_recsys,
-                    frecsys=self.follow_recsys,
+                    recsys=content_recsys,
+                    frecsys=follow_recsys,
                     language=ag["language"],
                     owner=ag["owner"],
                     config=self.config,
                     load=not self.first_run,
                     web=True,
-                    daily_activity_level=ag["daily_activity_level"],
-                    profession=ag["profession"],
-                    # prompt=ag["prompts"],
+                    prompt=ag["prompts"],
                 )
 
                 agent.set_prompts(self.prompts)
@@ -204,19 +198,17 @@ class YClientWeb(object):
                     recsys=content_recsys,
                     frecsys=follow_recsys,
                     is_page=1,
-                    web=True,
+                    web=True
                 )
 
                 page.set_prompts(self.prompts)
                 self.agents.add_agent(page)
-                self.pages.append(
-                    {
-                        "name": ag["name"],
-                        "feed": ag["feed_url"],
-                        "leaning": ag["leaning"],
-                        "category": ag["type"],
-                    }
-                )
+                self.pages.append({
+                    "name": ag["name"],
+                    "feed": ag["feed_url"],
+                    "leaning": ag["leaning"],
+                    "category": ag["type"]
+                })
 
     def set_interests(self):
         """
@@ -260,22 +252,14 @@ class YClientWeb(object):
             try:
                 if a["is_page"] == 0:
                     ag = Agent(
-                        name=a["name"],
-                        email=a["email"],
-                        load=True,
-                        config=self.config,
-                        web=True,
+                        name=a["name"], email=a["email"], load=True, config=self.config, web=True
                     )
                     ag.set_prompts(self.prompts)
                     ag.set_rec_sys(self.content_recsys, self.follow_recsys)
                     self.agents.add_agent(ag)
                 else:
                     ag = PageAgent(
-                        a["name"],
-                        email=a["email"],
-                        load=True,
-                        config=self.config,
-                        web=True,
+                        a["name"], email=a["email"], load=True, config=self.config, web=True
                     )
                     ag.set_prompts(self.prompts)
                     ag.set_rec_sys(self.content_recsys, self.follow_recsys)
@@ -297,7 +281,6 @@ class YClientWeb(object):
                 1,
                 int(len(self.agents.agents) * self.percentage_removed_agents_iteration),
             )
-
             st = json.dumps({"n_users": n_users, "left_on": tid})
 
             headers = {"Content-Type": "application/x-www-form-urlencoded"}
@@ -318,16 +301,15 @@ class YClientWeb(object):
         from y_client.utils import generate_user
 
         if agent is None:
-            # try:
+            try:
+                agent = generate_user(self.config, owner=self.agents_owner)
 
-            agent = generate_user(self.config, owner=self.agents_owner)
-
-            if agent is None:
-                return
-            agent.set_prompts(self.prompts)
-            agent.set_rec_sys(self.content_recsys, self.follow_recsys)
-        # except Exception:
-        #     pass
+                if agent is None:
+                    return
+                agent.set_prompts(self.prompts)
+                agent.set_rec_sys(self.content_recsys, self.follow_recsys)
+            except Exception:
+                pass
         if agent is not None:
             self.agents.add_agent(agent)
 
@@ -337,7 +319,7 @@ class YClientWeb(object):
                 name=page["name"],
                 url_feed=page["feed"],
                 category=page["category"],
-                leaning=page["leaning"],
+                leaning=page["leaning"]
             )
 
     def add_network(self):
@@ -358,9 +340,7 @@ class YClientWeb(object):
                         }
                         uid = post(f"{api_url}", headers=headers, data=json.dumps(data))
 
-                        users_id_map[l[0]] = json.loads(
-                            uid.__dict__["_content"].decode("utf-8")
-                        )["id"]
+                        users_id_map[l[0]] = json.loads(uid.__dict__["_content"].decode("utf-8"))["id"]
 
                     if l[1] not in users_id_map:
                         api_url = f"{self.config['servers']['api']}get_user_id"
@@ -368,9 +348,7 @@ class YClientWeb(object):
                             "username": l[1],
                         }
                         uid = post(f"{api_url}", headers=headers, data=json.dumps(data))
-                        users_id_map[l[1]] = json.loads(
-                            uid.__dict__["_content"].decode("utf-8")
-                        )["id"]
+                        users_id_map[l[1]] = json.loads(uid.__dict__["_content"].decode("utf-8"))["id"]
 
                     api_url = f"{self.config['servers']['api']}follow"
 

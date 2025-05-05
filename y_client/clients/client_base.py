@@ -110,19 +110,70 @@ class YClientBase(object):
 
     def load_rrs_endpoints(self, filename):
         """
-        Load rss feeds from a file
+        Load rss feeds from a file and process them.
 
         :param filename: the file containing the rss feeds
+        :return: True if feeds were loaded successfully and user wants to continue, False otherwise
         """
+        try:
+            print(f"Loading RSS feed definitions from {filename}...")
+            data = json.load(open(filename))
+            print(f"Found {len(data)} feed definitions in file")
 
-        data = json.load(open(filename))
-        for f in tqdm.tqdm(data):
-            self.feed.add_feed(
-                name=f["name"],
-                url_feed=f["feed_url"],
-                category=f["category"],
-                leaning=f["leaning"],
-            )
+            for f in tqdm.tqdm(data, desc="Adding feeds"):
+                self.feed.add_feed(
+                    name=f["name"],
+                    url_feed=f["feed_url"],
+                    category=f.get("category", ""),
+                    leaning=f.get("leaning", ""),
+                    language=f.get("language", "en"),
+                    country=f.get("country", "")
+                )
+
+            # Process all feeds manually
+            total_stats = {
+                "total_feeds": len(self.feed.feeds),
+                "successful_feeds": 0,
+                "total_articles": 0,
+                "feeds_with_articles": 0
+            }
+
+            print("\n====== RSS Feed Processing ======")
+            print(f"Processing {len(self.feed.feeds)} feeds...")
+
+            for feed in self.feed.feeds:
+                print(f"\n--- Processing {feed.name} ---")
+                initial_article_count = len(feed.news)
+                feed.read_feed()
+                articles_found = len(feed.news) - initial_article_count
+
+                if articles_found > 0:
+                    total_stats["feeds_with_articles"] += 1
+                    total_stats["total_articles"] += articles_found
+                    total_stats["successful_feeds"] += 1
+
+            print("\n====== RSS Feed Processing Summary ======")
+            print(f"Total feeds processed: {total_stats['total_feeds']}")
+            print(f"Successful feeds: {total_stats['successful_feeds']}")
+            print(f"Feeds with articles: {total_stats['feeds_with_articles']}")
+            print(f"Total articles collected: {total_stats['total_articles']}")
+
+            # Ask user if they want to continue
+            if total_stats['total_articles'] == 0:
+                print("\nWARNING: No articles were found in any feeds!")
+                response = input("\nNo articles were found. Continue with simulation anyway? (y/n): ")
+                return response.lower() == 'y'
+            else:
+                response = input("\nContinue with simulation using these articles? (y/n): ")
+                return response.lower() == 'y'
+
+        except Exception as e:
+            print(f"Error loading RSS feeds: {str(e)}")
+            import traceback
+            traceback.print_exc()
+
+            response = input("\nError loading feeds. Continue anyway? (y/n): ")
+            return response.lower() == 'y'
 
     def set_interests(self):
         """
@@ -327,7 +378,10 @@ class YClientBase(object):
                 for _ in range(
                     max(
                         1,
-                        int(len(daily_active) * self.percentage_new_agents_iteration),
+                        int(
+                            len(daily_active)
+                            * self.percentage_new_agents_iteration
+                        ),
                     )
                 ):
                     self.add_agent()

@@ -1,0 +1,140 @@
+{
+    "servers": {
+        "llm": "http://127.0.0.1:11434/v1",
+        "llm_api_key": "NULL",
+        "llm_max_tokens": 800,
+        "llm_temperature": 0.6,
+        "llm_v": "http://127.0.0.1:11434/v1",
+        "llm_v_api_key": "NULL",
+        "llm_v_max_tokens": 300,
+        "llm_v_temperature": 0.5,
+        "api": "http://127.0.0.1:5010/"
+    },
+    "simulation": {
+        "name": "simulation",
+        "client": "YClientBase",
+        "days": 100,
+        "slots": 24,
+        "starting_agents": 150,
+        "percentage_new_agents_iteration": 0.05,
+        "percentage_removed_agents_iteration": 0.02,
+        "hourly_activity": {
+            "10": 0.021,
+            "16": 0.032,
+            "8": 0.02,
+            "12": 0.024,
+            "15": 0.032,
+            "17": 0.032,
+            "23": 0.025,
+            "6": 0.017,
+            "18": 0.032,
+            "11": 0.022,
+            "13": 0.027,
+            "14": 0.03,
+            "20": 0.03,
+            "21": 0.029,
+            "7": 0.018,
+            "22": 0.027,
+            "9": 0.02,
+            "3": 0.02,
+            "5": 0.017,
+            "4": 0.018,
+            "1": 0.021,
+            "2": 0.02,
+            "0": 0.023,
+            "19": 0.031
+        },
+        "actions_likelihood": {
+            "post": 0.01,
+            "image": 0.0,
+            "news": 0.0,
+            "comment": 0.6,
+            "read": 0.5,
+            "share": 0.0,
+            "search": 0.2,
+            "share_link": 0.15,
+            "cast": 0.0
+        }
+    },
+    "agents": {
+        "languages": ["english"],
+        "education_levels": ["high school", "bachelor", "master", "phd"],
+        "max_length_thread_reading": 5,
+        "reading_from_follower_ratio": 0.7,
+        "political_leanings": ["Democrat", "Republican", "Independent"],
+        "age": {
+            "min": 18,
+            "max": 60
+        },
+        "daily_actions": {
+            "min": 2,
+            "max": 6
+        },
+        "llm_agents": ["dolphin3"],
+        "llm_v_agent": ["minicpm-v"],
+        "n_interests": {
+            "min": 2,
+            "max": 10
+        },
+        "round_actions": {
+            "min": 2,
+            "max": 6
+        },
+        "nationalities": ["American"],
+        "probability_of_daily_follow": 0.15,
+        "interests": [
+            "Social Media & Online Platforms",
+            "Internet Policy & Regulation",
+            "Artificial Intelligence",
+            "Electric Vehicles & Transportation",
+            "Software Development",
+            "Clean Energy & Sustainability",
+            "Cybersecurity & Privacy",
+            "Big Tech",
+            "Space Technology",
+            "Open Source Projects"
+        ],
+        "toxicity_levels": ["absolutely no", "no", "moderately", "extremely"],
+        "attention_window": 336,
+        "big_five": {
+            "oe": ["inventive/curious", "consistent/cautious"],
+            "co": ["efficient/organized", "extravagant/careless"],
+            "ex": ["outgoing/energetic", "solitary/reserved"],
+            "ag": ["friendly/compassionate", "critical/judgmental"],
+            "ne": ["sensitive/nervous", "resilient/confident"]
+        }
+    },
+    "posts": {
+        "visibility_rounds": 48,
+        "emotions": {
+            "admiration": null,
+            "amusement": null,
+            "anger": null,
+            "annoyance": null,
+            "approval": null,
+            "caring": null,
+            "confusion": null,
+            "curiosity": null,
+            "desire": null,
+            "disappointment": null,
+            "disapproval": null,
+            "disgust": null,
+            "embarrassment": null,
+            "excitement": null,
+            "fear": null,
+            "gratitude": null,
+            "grief": null,
+            "joy": null,
+            "love": null,
+            "nervousness": null,
+            "optimism": null,
+            "pride": null,
+            "realization": null,
+            "relief": null,
+            "remorse": null,
+            "sadness": null,
+            "surprise": null,
+            "trust": null
+        }
+    }
+}

@@ -52,7 +52,8 @@
       "read": 0.2,
       "share": 0.8,
       "search": 0.1,
-      "cast": 0.0
+      "cast": 0.0,
+      "share_link": 0.3
     }
   },
   "agents": {

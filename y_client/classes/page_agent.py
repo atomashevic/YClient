@@ -26,6 +26,7 @@ class PageAgent(Agent):
         news, website = self.select_news()
         if not isinstance(news, str):
             self.news(tid=tid, article=news, website=website)
+
         return
 
     def select_news(self):
@@ -65,9 +66,7 @@ class PageAgent(Agent):
         u1 = AssistantAgent(
             name=f"{self.name}",
             llm_config=self.llm_config,
-            system_message=self.__effify(
-                self.prompts["page_roleplay"], website=website, article=article
-            ),
+            system_message=self.__effify(self.prompts["page_roleplay"]),
             max_consecutive_auto_reply=1,
         )
 
@@ -202,3 +201,4 @@ class PageAgent(Agent):
             "is_page": self.is_page,
             "feed_url": self.feed_url,
         }
+

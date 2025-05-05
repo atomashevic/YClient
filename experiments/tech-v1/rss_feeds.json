@@ -1,0 +1,233 @@
+[
+    {
+        "url_site": "techcrunch.com",
+        "category": "technology",
+        "leaning": "center_left",
+        "name": "TechCrunch",
+        "feed_url": "https://techcrunch.com/feed/"
+    },
+    {
+        "url_site": "www.wired.com",
+        "category": "technology",
+        "leaning": "left",
+        "name": "Wired Magazine",
+        "feed_url": "https://www.wired.com/feed/rss"
+    },
+    {
+        "url_site": "theverge.com",
+        "category": "technology",
+        "leaning": "center_left",
+        "name": "The Verge",
+        "feed_url": "https://www.theverge.com/rss/index.xml"
+    },
+    {
+        "url_site": "www.nytimes.com/international/section/technology",
+        "category": "technology",
+        "leaning": "left",
+        "name": "NYT Technology",
+        "feed_url": "https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml"
+    },
+    {
+        "url_site": "www.arstechnica.com",
+        "category": "technology",
+        "leaning": "center",
+        "name": "ArsTechnica",
+        "feed_url": "https://feeds.arstechnica.com/arstechnica/index"
+    },
+    {
+        "url_site": "www.cnbc.com/technology/",
+        "category": "technology",
+        "leaning": "center",
+        "name": "CNBC Technology",
+        "feed_url": "https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=19854910"
+    },
+    {
+        "url_site": "www.theguardian.com/technology",
+        "category": "technology",
+        "leaning": "left",
+        "name": "The Guardian Technology",
+        "feed_url": "https://www.theguardian.com/technology/rss"
+    },
+    {
+        "url_site": "cnet.com",
+        "category": "technology",
+        "leaning": "center",
+        "name": "CNET Technology",
+        "feed_url": "https://www.cnet.com/rss/news/"
+    },
+    {
+        "url_site": "www.foxnews.com/tech",
+        "category": "technology",
+        "leaning": "right",
+        "name": "Fox News Technology",
+        "feed_url": "https://moxie.foxnews.com/google-publisher/tech.xml"
+    },
+    {
+        "url_site": "edition.cnn.com/business/tech",
+        "category": "technology",
+        "leaning": "left",
+        "name": "CNN Technology",
+        "feed_url": "http://rss.cnn.com/rss/cnn_tech.rss"
+    },
+    {
+        "url_site": "www.washingtontimes.com/news/technology",
+        "category": "technology",
+        "leaning": "right",
+        "name": "Washington Times Technology",
+        "feed_url": "https://www.washingtontimes.com/rss/headlines/culture/technology"
+    },
+    {
+        "url_site": "https://www.bbc.co.uk/news/technology",
+        "category": "technology",
+        "leaning": "center",
+        "name": "BBC Technology",
+        "feed_url": "http://feeds.bbci.co.uk/news/technology/rss.xml"
+    },
+    {
+        "url_site": "www.engadget.com",
+        "category": "technology",
+        "leaning": "center_left",
+        "name": "Engadget",
+        "feed_url": "https://www.engadget.com/rss.xml"
+    },
+    {
+        "url_site": "www.technologyreview.com",
+        "category": "technology",
+        "leaning": "unknown",
+        "name": "MIT Technology Review",
+        "feed_url": "https://www.technologyreview.com/feed/"
+    },
+    {
+        "url_site": "www.npr.org/sections/technology/",
+        "category": "technology",
+        "leaning": "unknown",
+        "name": "NPR Technology",
+        "feed_url": "https://www.npr.org/rss/rss.php?id=1019"
+    },
+    {
+        "url_site": "www.androidauthority.com",
+        "category": "technology",
+        "leaning": "unknown",
+        "name": "Android Authority",
+        "feed_url": "http://feed.androidauthority.com"
+    },
+    {
+        "url_site": "appleinsider.com",
+        "category": "technology",
+        "leaning": "unknown",
+        "name": "AppleInsider",
+        "feed_url": "https://appleinsider.com/rss/news"
+    },
+    {
+        "url_site": "bgr.com/tech",
+        "category": "technology",
+        "leaning": "unknown",
+        "name": "BGR",
+        "feed_url": "https://bgr.com/tech/feed/"
+    },
+    {
+        "url_site": "www.computerworld.com",
+        "category": "technology",
+        "leaning": "unknown",
+        "name": "Computerworld",
+        "feed_url": "https://www.computerworld.com/feed/"
+    },
+    {
+        "url_site": "news.ycombinator.com",
+        "category": "technology",
+        "leaning": "unknown",
+        "name": "Hacker News",
+        "feed_url": "https://news.ycombinator.com/rss"
+    },
+    {
+        "url_site": "lifehacker.com",
+        "category": "technology",
+        "leaning": "unknown",
+        "name": "Lifehacker",
+        "feed_url": "https://lifehacker.com/rss"
+    },
+    {
+        "url_site": "www.macworld.com",
+        "category": "technology",
+        "leaning": "unknown",
+        "name": "Macworld",
+        "feed_url": "https://www.macworld.com/feed/"
+    },
+    {
+        "url_site": "www.makeuseof.com",
+        "category": "technology",
+        "leaning": "unknown",
+        "name": "MakeUseOf",
+        "feed_url": "https://www.makeuseof.com/feed/"
+    },
+    {
+        "url_site": "www.producthunt.com",
+        "category": "technology",
+        "leaning": "unknown",
+        "name": "Product Hunt",
+        "feed_url": "http://www.producthunt.com/feed"
+    },
+    {
+        "url_site": "www.reuters.com/technology",
+        "category": "technology",
+        "leaning": "unknown",
+        "name": "Reuters Technology",
+        "feed_url": "https://www.reutersagency.com/feed/?best-topics=tech&post_type=best"
+    },
+    {
+        "url_site": "slashdot.org",
+        "category": "technology",
+        "leaning": "unknown",
+        "name": "Slashdot",
+        "feed_url": "http://rss.slashdot.org/Slashdot/slashdotMain"
+    },
+    {
+        "url_site": "www.techmeme.com",
+        "category": "technology",
+        "leaning": "unknown",
+        "name": "Techmeme",
+        "feed_url": "https://www.techmeme.com/feed.xml"
+    },
+    {
+        "url_site": "www.techradar.com/news",
+        "category": "technology",
+        "leaning": "unknown",
+        "name": "TechRadar News",
+        "feed_url": "https://www.techradar.com/rss/news"
+    },
+    {
+        "url_site": "www.techrepublic.com",
+        "category": "technology",
+        "leaning": "unknown",
+        "name": "TechRepublic",
+        "feed_url": "https://www.techrepublic.com/rssfeeds/articles/"
+    },
+    {
+        "url_site": "venturebeat.com",
+        "category": "technology",
+        "leaning": "unknown",
+        "name": "VentureBeat",
+        "feed_url": "https://venturebeat.com/feed/"
+    },
+    {
+        "url_site": "www.zdnet.com",
+        "category": "technology",
+        "leaning": "unknown",
+        "name": "ZDNet",
+        "feed_url": "https://www.zdnet.com/news/rss.xml"
+    },
+    {
+        "url_site": "www.ft.com/technology",
+        "category": "technology",
+        "leaning": "unknown",
+        "name": "Financial Times Technology",
+        "feed_url": "https://www.ft.com/technology?format=rss"
+    },
+    {
+        "url_site": "www.wsj.com",
+        "category": "technology",
+        "leaning": "unknown",
+        "name": "Wall Street Journal",
+        "feed_url": "https://feeds.a.dj.com/rss/RSSWSJD.xml"
+    }
+]
