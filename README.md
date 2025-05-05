@@ -1,6 +1,6 @@
 # Reddit-like YSocial Client (fork)
 
-**This repository is a fork of the [YSocial client application](https://github.com/giuliorossetti/YClient), modified to better support Reddit-like social simulation scenarios.**
+**This repository is a fork of the [YSocial client application](https://github.com/YSocialTwin/YClient), modified to better support Reddit-like social simulation scenarios.**
 
 
 > YSocial is a client-server application that implements a digital twin of an online social media platform using Large Language Models (LLMs). 
