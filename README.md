@@ -7,7 +7,7 @@
 
 ## About This Fork
 
-This version of the YSocial client introduces several changes to make the platform more suitable for simulating Reddit-style social media environments. The focus of this README is to highlight the key differences and adaptations from the original YSocial client. For general usage instructions, features, and technical details, please refer to the [original YSocial client documentation](https://github.com/giuliorossetti/YClient) and the [official documentation](https://ysocialtwin.github.io/).
+This version of the YSocial client introduces several changes to make the platform more suitable for simulating Reddit-style social media environments. The focus of this README is to highlight the key differences and adaptations from the original YSocial client. For general usage instructions, features, and technical details, please refer to the [original YSocial client documentation](https://github.com/YSocialTwin/YClient) and the [official documentation](https://ysocialtwin.github.io/).
 
 ### Key Modifications for Reddit-Like Simulation
 
