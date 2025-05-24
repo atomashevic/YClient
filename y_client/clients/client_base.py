@@ -175,6 +175,42 @@ class YClientBase(object):
             response = input("\nError loading feeds. Continue anyway? (y/n): ")
             return response.lower() == 'y'
 
+    def load_news_from_urls(self, urls_file, max_urls=1000):
+        """
+        Load news articles from a list of URLs in a text file.
+        :param urls_file: Path to the file containing URLs (one per line)
+        :param max_urls: Maximum number of URLs to process (randomly sampled)
+        :return: True if articles were loaded successfully and user wants to continue, False otherwise
+        """
+        try:
+            print(f"Loading URLs from file: {urls_file}")
+            with open(urls_file, "r") as f:
+                urls = [line.strip() for line in f if line.strip()]
+            if not urls:
+                print("No URLs found in the file.")
+                response = input("No URLs found. Continue with simulation anyway? (y/n): ")
+                return response.lower() == 'y'
+            if len(urls) > max_urls:
+                print(f"Sampling {max_urls} URLs from {len(urls)} available...")
+                urls = random.sample(urls, max_urls)
+            from y_client.news_feeds.url_reader import URLReader
+            url_reader = URLReader(urls)
+            stats = url_reader.process_urls()
+            # Ask user if they want to continue
+            if stats['processed'] == 0:
+                print("\nWARNING: No articles were successfully processed from URLs!")
+                response = input("No articles were found. Continue with simulation anyway? (y/n): ")
+                return response.lower() == 'y'
+            else:
+                response = input("\nContinue with simulation using these articles? (y/n): ")
+                return response.lower() == 'y'
+        except Exception as e:
+            print(f"Error loading news from URLs: {str(e)}")
+            import traceback
+            traceback.print_exc()
+            response = input("\nError loading URLs. Continue anyway? (y/n): ")
+            return response.lower() == 'y'
+
     def set_interests(self):
         """
         Set the interests of the agents

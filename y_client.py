@@ -65,6 +65,26 @@ if __name__ == "__main__":
         "to be used for the simulation",
     )
 
+    parser.add_argument(
+        "--news_source",
+        default="rss",
+        choices=["rss", "urls"],
+        help="Specify the source of news: 'rss' for RSS feeds or 'urls' for a list of URLs. Default is 'rss'.",
+    )
+
+    parser.add_argument(
+        "--urls_file",
+        default=None,
+        help="Path to a text file containing URLs (one per line) for news extraction. Required if --news_source is 'urls'.",
+    )
+
+    parser.add_argument(
+        "--max_urls",
+        type=int,
+        default=1000,
+        help="Maximum number of URLs to process from the URLs file (randomly sampled). Applies only to --news_source=urls. Default: 1000."
+    )
+
     args = parser.parse_args()
 
     agents_owner = args.owner
@@ -114,7 +134,17 @@ if __name__ == "__main__":
 
     # Handle news feeds if requested
     proceed_with_simulation = True
-    if args.news:
+    if args.news_source == "urls":
+        if not args.urls_file:
+            print("Error: --urls_file must be specified when --news_source is 'urls'.")
+            sys.exit(1)
+
+        print("Resetting news database...")
+        experiment.reset_news_db()
+        print("Loading news from URLs...")
+        proceed_with_simulation = experiment.load_news_from_urls(args.urls_file, max_urls=args.max_urls)
+
+    elif args.news:
         print("Resetting news database...")
         experiment.reset_news_db()
         print("Loading RSS feeds...")
